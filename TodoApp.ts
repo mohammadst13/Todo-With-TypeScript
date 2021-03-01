@@ -1,5 +1,4 @@
 // controller
-
 import { Todo, TodoState } from "./Model";
 import TodoService, { ITodoService } from "./TodoService";
 import TodoListComponent from "./TodoListComponent";
@@ -10,6 +9,7 @@ export class TodoApp {
 
   constructor(el, todos) {
     this.todoService = new TodoService(todos);
+    this.initialize(el);
   }
 
   addTodo(todoName) {
@@ -21,6 +21,8 @@ export class TodoApp {
     this.renderTodos();
   }
   toggleTodoState(todoId) {
+    console.log(todoId);
+    
     this.todoService.toggle(todoId);
     this.renderTodos();
   }
@@ -44,7 +46,10 @@ export class TodoApp {
     });
 
     todoListEl.addEventListener("todo-toggle", function(evnt) {
-      var todoId = evnt.details.todoId;
+      console.log(evnt);
+      var todoId = evnt.detail.todoId;
+   
+      
       _this.todoService.toggle(todoId);
       _this.renderTodos();
     });

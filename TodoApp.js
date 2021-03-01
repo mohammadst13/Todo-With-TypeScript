@@ -1,4 +1,3 @@
-// controller
 System.register(["./TodoService", "./TodoListComponent"], function (exports_1, context_1) {
     "use strict";
     var TodoService_1, TodoListComponent_1, TodoApp;
@@ -12,10 +11,11 @@ System.register(["./TodoService", "./TodoListComponent"], function (exports_1, c
                 TodoListComponent_1 = TodoListComponent_1_1;
             }
         ],
-        execute: function () {// controller
+        execute: function () {
             TodoApp = /** @class */ (function () {
                 function TodoApp(el, todos) {
                     this.todoService = new TodoService_1.default(todos);
+                    this.initialize(el);
                 }
                 TodoApp.prototype.addTodo = function (todoName) {
                     this.todoService.add(todoName);
@@ -26,6 +26,7 @@ System.register(["./TodoService", "./TodoListComponent"], function (exports_1, c
                     this.renderTodos();
                 };
                 TodoApp.prototype.toggleTodoState = function (todoId) {
+                    console.log(todoId);
                     this.todoService.toggle(todoId);
                     this.renderTodos();
                 };
@@ -42,7 +43,8 @@ System.register(["./TodoService", "./TodoListComponent"], function (exports_1, c
                         evnt.preventDefault();
                     });
                     todoListEl.addEventListener("todo-toggle", function (evnt) {
-                        var todoId = evnt.details.todoId;
+                        console.log(evnt);
+                        var todoId = evnt.detail.todoId;
                         _this.todoService.toggle(todoId);
                         _this.renderTodos();
                     });
